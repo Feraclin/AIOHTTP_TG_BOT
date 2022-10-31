@@ -1,0 +1,19 @@
+user_token: Ваш_токен
+
+session:
+  key: CaY5iCkYtN7DqXdiYK1BvmGrQuaSA4Tl4bEk9my0jc0=
+admin:
+  email: admin@admin.com
+  password: admin
+database:
+  host: db
+  port: 5432
+  user: postgres
+  password: postgres
+  database: postgres
+bot:
+  token_tg: Токен_бота
+rabbitmq:
+  host: rabbitmq
+
+

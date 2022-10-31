@@ -1,0 +1,50 @@
+version: '3.4'
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 23ef98ik
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - tg_bot
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 6080:8080
+    networks:
+      - tg_bot
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - 15672:15672
+      - 5672:5672
+    networks:
+      - tg_bot
+
+  web:
+    build: .
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+      - rabbitmq
+      - adminer
+    networks:
+      - tg_bot
+
+volumes:
+  pgdata:
+
+networks:
+  tg_bot:
+    driver: bridge
